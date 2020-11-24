@@ -2,7 +2,7 @@ package Programmers.sort;
 
 import java.util.*;
 
-public class K번쨰수 {
+public class PG_K번째수 {
 
     public static void main(String arg[]) {
 
