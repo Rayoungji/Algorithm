@@ -1,4 +1,4 @@
-package naver.Internship2020;
+package naver;
 
 import java.io.IOException;
 import java.util.LinkedList;
