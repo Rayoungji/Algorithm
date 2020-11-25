@@ -1,8 +1,4 @@
-package Programmers.Queue;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
+package Programmers.queue;
 
 public class PG_주식가격 {
     public static void main(String args[]) {

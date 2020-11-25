@@ -1,8 +1,7 @@
-package Programmers.Queue;
+package Programmers.queue;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class PG_다리를_지나는_트럭 {
     public static void main(String args[]) {
