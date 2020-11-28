@@ -1,4 +1,4 @@
-package naver;
+package codingTest.naver;
 
 import java.io.IOException;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package nhn;
+package codingTest.nhn;
 
 import java.util.ArrayList;
 
