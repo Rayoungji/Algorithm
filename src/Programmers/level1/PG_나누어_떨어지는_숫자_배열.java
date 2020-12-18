@@ -8,7 +8,8 @@ import java.util.List;
 public class PG_나누어_떨어지는_숫자_배열 {
     public static void main(String args[]) {
         int array[] = {5, 9, 7, 10};
-        System.out.println(Arrays.toString(solution(array, 10)));
+        System.out.println(Arrays.toString(solution(array, 5)));
+        System.out.println(Arrays.toString(solutionByStream(array,5)));
     }
 
     public static int[] solution(int[] arr, int divisor) {
@@ -32,5 +33,9 @@ public class PG_나누어_떨어지는_숫자_배열 {
             }
             return answer;
         }
+    }
+
+    public static int[] solutionByStream(int[] arr, int divisor) {
+       return Arrays.stream(arr).filter(i -> i%divisor ==0 ).toArray();
     }
 }
