@@ -2,8 +2,8 @@ package Programmers.level1;
 
 public class PG_키패드누르기 {
     public static void main(String args[]) {
-        int[] num = {1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5};
-        System.out.println(solution(num, "right"));
+        int[] num = {7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2};
+        System.out.println(solution(num, "left"));
     }
 
     public static String solution(int[] numbers, String hand) {
@@ -18,31 +18,40 @@ public class PG_키패드누르기 {
                 right = i;
                 answer += "R";
             } else if (i == 2 || i == 5 || i == 8 || i == 0) {
-                int leftX = (left - 1) / 3;
-                int rightX = (right - 1) / 3;
-                int midX;
+                int leftLength;
+                int rightLength;
                 if (i == 0) {
-                    midX = 11 % 3;
+                    leftLength = abs(left, 11);
+                    rightLength = abs(right, 11);
+                    i = 11;
                 } else {
-                    midX = i % 3;
+                    leftLength = abs(left, i);
+                    rightLength = abs(right, i);
                 }
-                if (Math.abs(midX - leftX)+1 > Math.abs(midX - rightX)+1) {
-                    answer += "L";
-                    left = i;
-                } else if (Math.abs(midX - leftX)+1 < Math.abs(midX - rightX)+1) {
-                    answer += "R";
+                if (leftLength > rightLength) {
                     right = i;
-                } else if (Math.abs(midX - leftX)+1 == Math.abs(midX - rightX)+1) {
+                    answer += "R";
+                } else if (leftLength < rightLength) {
+                    left = i;
+                    answer += "L";
+                } else {
                     if (hand.equals("right")) {
-                        answer += "R";
                         right = i;
+                        answer += "R";
                     } else {
-                        answer += "L";
                         left = i;
+                        answer += "L";
                     }
                 }
             }
         }
         return answer;
+    }
+
+    public static int abs(int num, int mid) {
+        int midX = (mid - 1) / 3;
+        int numX = (num - 1) / 3;
+        int numY = (num - 1) % 3;
+        return Math.abs(midX - numX) + Math.abs(1 - numY);
     }
 }
