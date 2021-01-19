@@ -1,53 +1,59 @@
 package Programmers.level1;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class PG_실패율 {
-    public static void main(String args[]){
-
+    public static void main(String args[]) {
+        int[] stages = {2, 1, 2, 6, 2, 4, 3, 3};
+        System.out.println(Arrays.toString(solution(5, stages)));
     }
+
     public static int[] solution(int N, int[] stages) {
+        List<Stage> stageList = new ArrayList<>();
+        for (int i=1; i<=N; i++){
+            int now = 0;
+            int clear = 0;
 
-        int[] cur = new int[N+1];
-        for(int i = 0 ; i < stages.length; i++) {
-            if(stages[i] != N+1)
-                cur[stages[i]]++;
-        }
-
-        int total = stages.length;
-        fail[] fails = new fail[N+1];
-        fails[0] = new fail(1000, -1);
-        for(int i = 1 ; i < cur.length ; i++) {
-            if(total == 0){
-                fails[i] = new fail(i, 0);
-            }else
-                fails[i] = new fail(i, (double)cur[i]/total);
-            total -= cur[i];
-        }
-
-        Arrays.sort(fails, new Comparator<fail>() {
-            public int compare(fail o1, fail o2) {
-                if(o1.rate != o2.rate) {
-                    return -Double.compare(o1.rate, o2.rate);
+            for (int stage : stages) {
+                if (i <= stage) {
+                    clear += 1;
                 }
-                return o1.num - o2.num;
+                if (i == stage) {
+                    now += 1;
+                }
             }
-        });
 
-        int[] ans = new int[N];
-        for(int i = 0 ; i < N; i++) {
-            ans[i] = fails[i].num;
+            if (clear == 0) {
+                stageList.add(new Stage(i, 0));
+            } else {
+                stageList.add(new Stage(i, (double) now / clear));
+            }
         }
-        return ans;
-
+        stageList.sort(Stage::compareTo);
+        return stageList.stream().mapToInt(i -> i.stageNum).toArray();
     }
-    static class fail{
-        int num;
-        double rate;
-        fail(int num, double rate){
-            this.num = num;
-            this.rate = rate;
+
+    public static class Stage implements Comparable<Stage> {
+        int stageNum;
+        double failRate;
+
+        public Stage(int stageNum, double failRate) {
+            this.stageNum = stageNum;
+            this.failRate = failRate;
+        }
+
+
+        @Override
+        public int compareTo(Stage o) {
+            if (o.failRate < this.failRate) {
+                return -1;
+            } else if (o.failRate == this.failRate) {
+                if(o.stageNum > this.stageNum) {
+                    return -1;
+                } else { return 1;}
+            } else {
+                return 1;
+            }
         }
     }
 }
