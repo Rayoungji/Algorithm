@@ -1,38 +1,32 @@
 package Programmers.binarysearch;
 
-public class PG_예산 {
-    public static void main(String args[]){
+import java.util.Arrays;
 
+public class PG_예산 {
+    public static void main(String args[]) {
+        int budgets[] = {120, 110, 140, 150};
+        System.out.println(solution(budgets, 485));
     }
+
     public static int solution(int[] budgets, int M) {
+        int min = 0;
+        int max = Arrays.stream(budgets).max().getAsInt();
         int answer = 0;
-        int left = 0;
-        int right = 0;
-        for (int budget : budgets) {
-            if (budget > right) {
-                right = budget;
-// answer의 최대 값은 budgets의 요소의 최대값
-            }
-        }
-        int middle = 0;
-        while (left <= right) {
-            long sum = 0;
-            middle = (left + right) / 2;
-            for (int budget : budgets) {
-                if (budget >= middle) {
-                    sum += middle;
-                }
-                else {
-                    sum += budget;
+        while (min <= max) {
+            int mid = (min + max) / 2;
+            int sum = 0;
+            for (int b : budgets) {
+                if (b > mid) {
+                    sum += mid;
+                } else {
+                    sum += b;
                 }
             }
-            if (sum > M) {
-                right = middle - 1;
-            }
-            else {
-// answer에 의한 예산의 합은 예산 M보다 작아야 하므로 해당 분기에서 처리
-                answer = middle;
-                left = middle + 1;
+            if (sum <= M) {
+                min = mid + 1;
+                answer = mid;
+            } else {
+                max = mid - 1;
             }
         }
         return answer;
