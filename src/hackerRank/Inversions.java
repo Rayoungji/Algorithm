@@ -18,17 +18,17 @@ public class Inversions {
     public static long maxInversions(List<Integer> arr) {
 
         long answer = 0;
-
-        for(int i=0; i<arr.size(); i++) {
-            for(int j=i+1; j<arr.size(); j++) {
-                for(int k=j+1; k<arr.size(); k++) {
-                    if(arr.get(i) > arr.get(j) && arr.get(j) > arr.get(k)) {
-                        answer++;
-                    }
+        for(int i=0;i<arr.size()-2;i++){
+            for(int j=i+1;j<arr.size()-1;j++){
+                if(arr.get(j) >= arr.get(i))
+                    continue;
+                for(int k=j+1;k<arr.size();k++){
+                    if(arr.get(k) >= arr.get(j))
+                        continue;
+                    answer++;
                 }
             }
         }
-
         return answer;
     }
 }
