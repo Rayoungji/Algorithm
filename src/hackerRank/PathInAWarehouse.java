@@ -1,5 +1,6 @@
 package hackerRank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PathInAWarehouse {
@@ -10,8 +11,8 @@ public class PathInAWarehouse {
 
         if(warehouse.get(0).get(0) == 0) return 0;
 
-        int m = warehouse.size();
-        int n = warehouse.get(0).size();
+        int m = warehouse.size(); //행
+        int n = warehouse.get(0).size();  //열
 
         int[][] dp = new int[m][n];
 
